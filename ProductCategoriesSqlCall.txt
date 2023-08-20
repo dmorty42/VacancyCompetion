@@ -1,0 +1,26 @@
+﻿
+Структура таблиц:
+- Products:
+    ProductID (первичный ключ)
+    ProductName
+
+-Categories:
+    CategoryID (первичный ключ)
+    CategoryName
+
+-ProductCategories:
+    ProductID (внешний ключ на Products)
+    CategoryID (внешний ключ на Categories)
+
+SELECT 
+    P.ProductName,
+    ISNULL(C.CategoryName, 'Без категории') as CategoryName
+FROM 
+    Products P
+LEFT JOIN 
+    ProductCategories PC ON P.ProductID = PC.ProductID
+LEFT JOIN 
+    Categories C ON PC.CategoryID = C.CategoryID
+ORDER BY 
+    P.ProductName, C.CategoryName;
+
